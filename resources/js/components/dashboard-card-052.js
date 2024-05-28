@@ -66,7 +66,7 @@ const dashboardCard052 = () => {
         dark: "#475569",
     };
 
-    fetch("/json-humidity-data")
+    fetch("/public/json-humidity-data")
         .then((response) => response.json())
         .then((result) => {
             const labels = result.map((item) => item.timestamp);

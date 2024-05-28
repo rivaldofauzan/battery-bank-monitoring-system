@@ -67,7 +67,7 @@ const dashboardCard05 = () => {
         dark: "#475569",
     };
 
-    fetch("/json-voltage-data")
+    fetch("/public/json-voltage-data")
         .then((response) => response.json())
         .then((result) => {
             const labels = result.map((item) => item.timestamp);

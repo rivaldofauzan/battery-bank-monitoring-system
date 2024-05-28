@@ -66,7 +66,7 @@ const dashboardCard055 = () => {
         dark: "#475569",
     };
 
-    fetch("/json-power-data")
+    fetch("/public/json-power-data")
         .then((response) => response.json())
         .then((result) => {
             const labels = result.map((item) => item.timestamp);

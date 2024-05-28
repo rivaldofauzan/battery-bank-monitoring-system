@@ -66,7 +66,7 @@ const dashboardCard054 = () => {
         dark: "#475569",
     };
 
-    fetch("/json-resistance-data")
+    fetch("/public/json-resistance-data")
         .then((response) => response.json())
         .then((result) => {
             const labels = result.map((item) => item.timestamp);
