@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use App\Models\Pengukuran;
+use Carbon\Carbon;
 
 class CalculateAverages extends Command
 {
@@ -23,16 +24,17 @@ class CalculateAverages extends Command
             }
         }
 
-        if (count($latestData) === 8) {
+        // Check if we have data from all 4 batteries
+        if (count($latestData) === count($batteries)) {
             $averageVoltage = collect($latestData)->avg('voltage');
             $averageCurrent = collect($latestData)->avg('current');
             $averageHumidity = collect($latestData)->avg('humidity');
             $averageTemperature = collect($latestData)->avg('temperature');
             $averageResistance = collect($latestData)->avg('resistance');
             $averagePower = collect($latestData)->avg('power');
-            $timestamp = now();
+            $timestamp = Carbon::now()->setTimezone('Asia/Jakarta'); // Set timezone to GMT+7
 
-            pengukuran::create([
+            Pengukuran::create([
                 'timestamp' => $timestamp,
                 'average_voltage' => $averageVoltage,
                 'average_current' => $averageCurrent,
@@ -41,6 +43,10 @@ class CalculateAverages extends Command
                 'average_resistance' => $averageResistance,
                 'average_power' => $averagePower,
             ]);
+
+            $this->info('Averages calculated and stored successfully.');
+        } else {
+            $this->error('Not enough data to calculate averages.');
         }
     }
 }

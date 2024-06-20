@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // Menjadwalkan command untuk berjalan setiap detik
+        // Schedule the command to run every minute
         $schedule->command('calculate:averages')->everyMinute()->withoutOverlapping();
     }
 

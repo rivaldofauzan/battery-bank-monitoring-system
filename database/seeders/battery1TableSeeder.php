@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class battery1TableSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class battery1TableSeeder extends Seeder
         $data = [];
         for ($i = 0; $i < 10; $i++) {  // Changed to 100 to add 100 more records
             $data[] = [
-                'timestamp' => now()->subSeconds($i * 10),
+                'timestamp' => Carbon::now()->subSeconds($i * 10)->setTimezone('Asia/Jakarta'),
                 'voltage' => rand(60, 100) / 10, // Generates values between 6.0 and 10.0
                 'current' => rand(20, 50) / 10,  // Generates values between 2.0 and 5.0
                 'humidity' => rand(40, 60), // Generates integer values between 40 and 60
